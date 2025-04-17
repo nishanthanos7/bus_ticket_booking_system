@@ -1,4 +1,4 @@
--- 👤 USERS: Stores passenger details
+--  USERS: Stores passenger details
 CREATE TABLE users (
     user_id INTEGER PRIMARY KEY AUTOINCREMENT, -- Unique ID that automatically increases for each new user
     name TEXT NOT NULL,                        -- Full name of the user (can't be empty)
@@ -8,7 +8,7 @@ CREATE TABLE users (
     updated_at TEXT DEFAULT CURRENT_TIMESTAMP  -- Time when the user’s info was last updated
 );
 
--- 🚌 BUSES: Information about buses available for booking
+--  BUSES: Information about buses available for booking
 CREATE TABLE buses (
     bus_id INTEGER PRIMARY KEY AUTOINCREMENT, -- Unique ID for each bus
     bus_number TEXT NOT NULL UNIQUE,          -- Bus number (must be unique)
@@ -17,7 +17,7 @@ CREATE TABLE buses (
     updated_at TEXT DEFAULT CURRENT_TIMESTAMP  -- Time when bus details were last updated
 );
 
--- 🗺️ ROUTES: Information about travel routes (from one place to another)
+--  ROUTES: Information about travel routes (from one place to another)
 CREATE TABLE routes (
     route_id INTEGER PRIMARY KEY AUTOINCREMENT, -- Unique ID for each route
     source TEXT NOT NULL,                      -- Starting location (e.g., Kathmandu)
@@ -27,7 +27,7 @@ CREATE TABLE routes (
     UNIQUE(source, destination) -- No two identical routes (e.g., no two Kathmandu to Pokhara routes)
 );
 
--- ⏰ SCHEDULES: When buses run and which routes they take
+--  SCHEDULES: When buses run and which routes they take
 CREATE TABLE schedules (
     schedule_id INTEGER PRIMARY KEY AUTOINCREMENT, -- Unique ID for each bus trip
     bus_id INTEGER NOT NULL,            -- Which bus is used for the trip (links to buses table)
@@ -45,7 +45,7 @@ CREATE TABLE schedules (
     -- If the route is deleted, all schedules that use this route will also be deleted automatically.
 );
 
--- 💺 BOOKINGS: Records each time a passenger reserves a seat on a bus
+--  BOOKINGS: Records each time a passenger reserves a seat on a bus
 CREATE TABLE bookings (
     booking_id INTEGER PRIMARY KEY AUTOINCREMENT, -- Unique booking ID
     user_id INTEGER NOT NULL,           -- Who made the booking (links to users table)
@@ -65,7 +65,7 @@ CREATE TABLE bookings (
     UNIQUE(schedule_id, seat_number) 
 );
 
--- 💳 PAYMENTS: Stores payment details for each booking
+--  PAYMENTS: Stores payment details for each booking
 CREATE TABLE payments (
     payment_id INTEGER PRIMARY KEY AUTOINCREMENT, -- Unique payment ID
     booking_id INTEGER NOT NULL UNIQUE, -- Links this payment to a specific booking
